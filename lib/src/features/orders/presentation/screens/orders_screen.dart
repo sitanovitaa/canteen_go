@@ -1,3 +1,4 @@
+import 'package:canteen_go/src/app/layout/responsive_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -5,9 +6,9 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Pesanan')),
-      body: const Center(child: Text('Belum ada pesanan.')),
+    return const ResponsiveScaffold(
+      currentIndex: 1,
+      child: Center(child: Text('Belum ada pesanan.')),
     );
   }
 }
