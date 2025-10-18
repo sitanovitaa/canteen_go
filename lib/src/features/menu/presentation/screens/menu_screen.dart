@@ -1,4 +1,3 @@
-import 'package:canteen_go/src/app/layout/responsive_scaffold.dart';
 import 'package:canteen_go/src/features/menu/presentation/widgets/menu_grid.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +6,6 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ResponsiveScaffold(
-      currentIndex: 0,
-      child: MenuGrid(),
-    );
+    return const MenuGrid();
   }
 }
