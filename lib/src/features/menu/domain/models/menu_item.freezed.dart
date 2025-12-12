@@ -12,8 +12,7 @@ part of 'menu_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MenuItem _$MenuItemFromJson(Map<String, dynamic> json) {
   return _MenuItem.fromJson(json);
@@ -28,12 +27,8 @@ mixin _$MenuItem {
   String? get imageUrl => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
-  /// Serializes this MenuItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MenuItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MenuItemCopyWith<MenuItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,14 +38,13 @@ abstract class $MenuItemCopyWith<$Res> {
   factory $MenuItemCopyWith(MenuItem value, $Res Function(MenuItem) then) =
       _$MenuItemCopyWithImpl<$Res, MenuItem>;
   @useResult
-  $Res call({
-    String id,
-    String name,
-    int price,
-    bool available,
-    String? imageUrl,
-    String category,
-  });
+  $Res call(
+      {String id,
+      String name,
+      int price,
+      bool available,
+      String? imageUrl,
+      String category});
 }
 
 /// @nodoc
@@ -63,8 +57,6 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MenuItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,35 +67,32 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
     Object? imageUrl = freezed,
     Object? category = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            name: null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                      as String,
-            price: null == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                      as int,
-            available: null == available
-                ? _value.available
-                : available // ignore: cast_nullable_to_non_nullable
-                      as bool,
-            imageUrl: freezed == imageUrl
-                ? _value.imageUrl
-                : imageUrl // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            category: null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                      as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      available: null == available
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -111,19 +100,17 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
 abstract class _$$MenuItemImplCopyWith<$Res>
     implements $MenuItemCopyWith<$Res> {
   factory _$$MenuItemImplCopyWith(
-    _$MenuItemImpl value,
-    $Res Function(_$MenuItemImpl) then,
-  ) = __$$MenuItemImplCopyWithImpl<$Res>;
+          _$MenuItemImpl value, $Res Function(_$MenuItemImpl) then) =
+      __$$MenuItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String name,
-    int price,
-    bool available,
-    String? imageUrl,
-    String category,
-  });
+  $Res call(
+      {String id,
+      String name,
+      int price,
+      bool available,
+      String? imageUrl,
+      String category});
 }
 
 /// @nodoc
@@ -131,12 +118,9 @@ class __$$MenuItemImplCopyWithImpl<$Res>
     extends _$MenuItemCopyWithImpl<$Res, _$MenuItemImpl>
     implements _$$MenuItemImplCopyWith<$Res> {
   __$$MenuItemImplCopyWithImpl(
-    _$MenuItemImpl _value,
-    $Res Function(_$MenuItemImpl) _then,
-  ) : super(_value, _then);
+      _$MenuItemImpl _value, $Res Function(_$MenuItemImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MenuItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,48 +131,45 @@ class __$$MenuItemImplCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? category = null,
   }) {
-    return _then(
-      _$MenuItemImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        price: null == price
-            ? _value.price
-            : price // ignore: cast_nullable_to_non_nullable
-                  as int,
-        available: null == available
-            ? _value.available
-            : available // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        imageUrl: freezed == imageUrl
-            ? _value.imageUrl
-            : imageUrl // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        category: null == category
-            ? _value.category
-            : category // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
+    return _then(_$MenuItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      available: null == available
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MenuItemImpl implements _MenuItem {
-  const _$MenuItemImpl({
-    required this.id,
-    required this.name,
-    required this.price,
-    this.available = true,
-    this.imageUrl,
-    this.category = 'food',
-  });
+  const _$MenuItemImpl(
+      {required this.id,
+      required this.name,
+      required this.price,
+      this.available = true,
+      this.imageUrl,
+      this.category = 'food'});
 
   factory _$MenuItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$MenuItemImplFromJson(json);
@@ -229,14 +210,12 @@ class _$MenuItemImpl implements _MenuItem {
                 other.category == category));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, name, price, available, imageUrl, category);
 
-  /// Create a copy of MenuItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MenuItemImplCopyWith<_$MenuItemImpl> get copyWith =>
@@ -244,19 +223,20 @@ class _$MenuItemImpl implements _MenuItem {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MenuItemImplToJson(this);
+    return _$$MenuItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MenuItem implements MenuItem {
-  const factory _MenuItem({
-    required final String id,
-    required final String name,
-    required final int price,
-    final bool available,
-    final String? imageUrl,
-    final String category,
-  }) = _$MenuItemImpl;
+  const factory _MenuItem(
+      {required final String id,
+      required final String name,
+      required final int price,
+      final bool available,
+      final String? imageUrl,
+      final String category}) = _$MenuItemImpl;
 
   factory _MenuItem.fromJson(Map<String, dynamic> json) =
       _$MenuItemImpl.fromJson;
@@ -273,11 +253,8 @@ abstract class _MenuItem implements MenuItem {
   String? get imageUrl;
   @override
   String get category;
-
-  /// Create a copy of MenuItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MenuItemImplCopyWith<_$MenuItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
