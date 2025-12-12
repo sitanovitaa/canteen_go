@@ -1,7 +1,10 @@
 import 'package:canteen_go/src/app/theme/tokens.dart';
+import 'package:canteen_go/src/features/cart/domain/models/cart_item.dart';
+import 'package:canteen_go/src/features/cart/presentation/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MenuCard extends StatelessWidget {
+class MenuCard extends ConsumerWidget {
   const MenuCard({
     super.key,
     required this.id,
@@ -14,7 +17,7 @@ class MenuCard extends StatelessWidget {
   final int price;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       elevation: Tokens.e1,
       shape: RoundedRectangleBorder(
@@ -38,7 +41,14 @@ class MenuCard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  ref
+                      .read(cartProvider.notifier)
+                      .add(CartItem(menuId: id, name: title, price: price));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('$title ditambahkan ke keranjang')),
+                  );
+                },
                 icon: const Icon(Icons.add_shopping_cart_outlined),
               ),
             ),
