@@ -8,9 +8,9 @@ class MenuGrid extends StatelessWidget {
   const MenuGrid({super.key});
 
   int _columnsForWidth(double w) {
-    if (w < Breakpoints.tablet) return 2;      // phone
-    if (w < Breakpoints.desktop) return 3;     // tablet
-    return 4;                                  // desktop
+    if (w < Breakpoints.tablet) return 2; // phone
+    if (w < Breakpoints.desktop) return 3; // tablet
+    return 4; // desktop
   }
 
   @override
@@ -33,18 +33,15 @@ class MenuGrid extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.all(Tokens.l),
           sliver: SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, i) {
-                final item = items[i];
-                return MenuCard(title: item[0] as String, price: item[1] as int);
-              },
-              childCount: items.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, i) {
+              final item = items[i];
+              return MenuCard(title: item[0] as String, price: item[1] as int);
+            }, childCount: items.length),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: cols,
               crossAxisSpacing: Tokens.l,
               mainAxisSpacing: Tokens.l,
-              childAspectRatio: 4/3,
+              childAspectRatio: 4 / 3,
             ),
           ),
         ),

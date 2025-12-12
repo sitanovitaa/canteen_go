@@ -10,7 +10,9 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: Tokens.e1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Tokens.r)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Tokens.r),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(Tokens.l),
         child: Column(
@@ -26,7 +28,7 @@ class MenuCard extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.add_shopping_cart_outlined),
               ),
-            )
+            ),
           ],
         ),
       ),
