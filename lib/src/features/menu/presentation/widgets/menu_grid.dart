@@ -1,9 +1,12 @@
 import 'package:canteen_go/src/app/layout/breakpoints.dart';
 import 'package:canteen_go/src/app/theme/tokens.dart';
+import 'package:canteen_go/src/common/widgets/skeleton.dart';
+import 'package:canteen_go/src/features/menu/presentation/controllers/menu_controller.dart';
 import 'package:canteen_go/src/features/menu/presentation/widgets/menu_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MenuGrid extends StatelessWidget {
+class MenuGrid extends ConsumerWidget {
   const MenuGrid({super.key});
 
   int _columnsForWidth(double w) {
@@ -13,38 +16,47 @@ class MenuGrid extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final w = MediaQuery.of(context).size.width;
     final cols = _columnsForWidth(w);
 
-    // Data dummy UI-first
-    final items = [
-      ['Nasi Goreng', 20000],
-      ['Mie Ayam', 18000],
-      ['Es Teh Manis', 6000],
-      ['Soto Ayam', 22000],
-      ['Bakso', 20000],
-      ['Ayam Geprek', 23000],
-    ];
+    final asyncItems = ref.watch(menuControllerProvider);
 
-    return CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.all(Tokens.l),
-          sliver: SliverGrid(
-            delegate: SliverChildBuilderDelegate((context, i) {
-              final item = items[i];
-              return MenuCard(title: item[0] as String, price: item[1] as int);
-            }, childCount: items.length),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: cols,
-              crossAxisSpacing: Tokens.l,
-              mainAxisSpacing: Tokens.l,
-              childAspectRatio: 4 / 3,
+    return asyncItems.when(
+      data: (items) {
+        if (items.isEmpty) {
+          return const SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(child: Text('Menu kosong untuk saat ini')),
+          );
+        }
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.all(Tokens.l),
+              sliver: SliverGrid(
+                delegate: SliverChildBuilderDelegate((context, i) {
+                  final item = items[i];
+                  if (i == 0) return const Skeleton(height: 120);
+                  return MenuCard(
+                    id: item.id,
+                    title: item.name,
+                    price: item.price,
+                  );
+                }, childCount: items.length),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: cols,
+                  crossAxisSpacing: Tokens.l,
+                  mainAxisSpacing: Tokens.l,
+                  childAspectRatio: 4 / 3,
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, st) => Center(child: Text(e.toString())),
     );
   }
 }

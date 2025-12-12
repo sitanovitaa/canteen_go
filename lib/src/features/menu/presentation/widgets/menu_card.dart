@@ -1,8 +1,15 @@
+import 'package:canteen_go/src/app/theme/tokens.dart';
 import 'package:flutter/material.dart';
-import '../../../../app/theme/tokens.dart';
 
 class MenuCard extends StatelessWidget {
-  const MenuCard({super.key, required this.title, required this.price});
+  const MenuCard({
+    super.key,
+    required this.id,
+    required this.title,
+    required this.price,
+  });
+
+  final String id;
   final String title;
   final int price;
 
