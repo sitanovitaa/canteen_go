@@ -13,13 +13,17 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.inbox_outlined, size: 48, color: Theme.of(context).hintColor),
+            Icon(
+              Icons.inbox_outlined,
+              size: 48,
+              color: Theme.of(context).hintColor,
+            ),
             const SizedBox(height: 12),
             Text(title, style: Theme.of(context).textTheme.titleMedium),
             if (message != null) ...[
               const SizedBox(height: 8),
               Text(message!, textAlign: TextAlign.center),
-            ]
+            ],
           ],
         ),
       ),

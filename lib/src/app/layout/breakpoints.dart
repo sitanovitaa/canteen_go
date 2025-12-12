@@ -1,7 +1,7 @@
 class Breakpoints {
-  static const phone = 0.0;       // < 600
-  static const tablet = 600.0;    // 600–1024
-  static const desktop = 1024.0;  // > 1024
+  static const phone = 0.0; // < 600
+  static const tablet = 600.0; // 600–1024
+  static const desktop = 1024.0; // > 1024
 }
 
 extension ScreenSize on double {

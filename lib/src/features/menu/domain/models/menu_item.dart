@@ -13,5 +13,6 @@ class MenuItem with _$MenuItem {
     @Default('food') String category,
   }) = _MenuItem;
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);
+  factory MenuItem.fromJson(Map<String, dynamic> json) =>
+      _$MenuItemFromJson(json);
 }
