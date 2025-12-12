@@ -46,7 +46,10 @@ class MenuCard extends ConsumerWidget {
                       .read(cartProvider.notifier)
                       .add(CartItem(menuId: id, name: title, price: price));
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('$title ditambahkan ke keranjang')),
+                    SnackBar(
+                      content: Text('$title ditambahkan ke keranjang'),
+                      duration: const Duration(milliseconds: 500),
+                    ),
                   );
                 },
                 icon: const Icon(Icons.add_shopping_cart_outlined),
