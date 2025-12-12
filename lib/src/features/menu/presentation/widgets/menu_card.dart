@@ -23,12 +23,18 @@ class MenuCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(Tokens.l),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
             const SizedBox(height: Tokens.s),
             Text('Rp $price'),
-            const SizedBox(height: Tokens.m),
+            const Spacer(),
             Align(
               alignment: Alignment.bottomRight,
               child: IconButton(

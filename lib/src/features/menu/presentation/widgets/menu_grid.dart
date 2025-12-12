@@ -1,5 +1,6 @@
 import 'package:canteen_go/src/app/layout/breakpoints.dart';
 import 'package:canteen_go/src/app/theme/tokens.dart';
+import 'package:canteen_go/src/common/widgets/error_state.dart';
 import 'package:canteen_go/src/common/widgets/skeleton.dart';
 import 'package:canteen_go/src/features/menu/presentation/controllers/menu_controller.dart';
 import 'package:canteen_go/src/features/menu/presentation/widgets/menu_card.dart';
@@ -48,7 +49,7 @@ class MenuGrid extends ConsumerWidget {
                   crossAxisCount: cols,
                   crossAxisSpacing: Tokens.l,
                   mainAxisSpacing: Tokens.l,
-                  childAspectRatio: 4 / 3,
+                  childAspectRatio: 3 / 4,
                 ),
               ),
             ),
@@ -56,7 +57,8 @@ class MenuGrid extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, st) => Center(child: Text(e.toString())),
+      error: (e, _) =>
+          const Center(child: ErrorState(title: 'Gagal memuat menu')),
     );
   }
 }
