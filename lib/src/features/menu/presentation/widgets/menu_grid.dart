@@ -31,34 +31,31 @@ class MenuGrid extends ConsumerWidget {
             child: Center(child: Text('Menu kosong untuk saat ini')),
           );
         }
-        return CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.all(Tokens.l),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate((context, i) {
-                  final item = items[i];
-                  if (i == 0) return const Skeleton(height: 120);
-                  return MenuCard(
-                    id: item.id,
-                    title: item.name,
-                    price: item.price,
-                  );
-                }, childCount: items.length),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: cols,
-                  crossAxisSpacing: Tokens.l,
-                  mainAxisSpacing: Tokens.l,
-                  childAspectRatio: 3 / 4,
-                ),
-              ),
+        return SliverPadding(
+          padding: const EdgeInsets.all(Tokens.l),
+          sliver: SliverGrid(
+            delegate: SliverChildBuilderDelegate((context, i) {
+              final item = items[i];
+              if (i == 0) return const Skeleton(height: 120);
+              return MenuCard(id: item.id, title: item.name, price: item.price);
+            }, childCount: items.length),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: cols,
+              crossAxisSpacing: Tokens.l,
+              mainAxisSpacing: Tokens.l,
+              childAspectRatio: 3 / 4,
             ),
-          ],
+          ),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) =>
-          const Center(child: ErrorState(title: 'Gagal memuat menu')),
+      loading: () => const SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(child: CircularProgressIndicator()),
+      ),
+      error: (e, _) => const SliverFillRemaining(
+        hasScrollBody: false,
+        child: ErrorState(title: 'Gagal memuat menu'),
+      ),
     );
   }
 }

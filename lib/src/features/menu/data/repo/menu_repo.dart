@@ -15,6 +15,7 @@ class FakeMenuRepo implements MenuRepo {
       MenuItem(id: 'm4', name: 'Soto Ayam', price: 22000),
       MenuItem(id: 'm5', name: 'Bakso', price: 20000),
       MenuItem(id: 'm6', name: 'Ayam Geprek', price: 23000),
+      MenuItem(id: 'm7', name: 'Sate', price: 25000),
     ];
   }
 }
