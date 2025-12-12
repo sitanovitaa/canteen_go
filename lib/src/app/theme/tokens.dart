@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Tokens {
   // Spacing
   static const s = 8.0;

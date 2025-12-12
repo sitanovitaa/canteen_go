@@ -1,8 +1,7 @@
+import 'package:canteen_go/src/app/router.dart';
+import 'package:canteen_go/src/app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'router.dart';
-import 'theme/theme.dart';
 
 class CanteenGoApp extends ConsumerWidget {
   const CanteenGoApp({super.key});

@@ -1,8 +1,7 @@
+import 'package:canteen_go/src/app/layout/breakpoints.dart';
+import 'package:canteen_go/src/app/theme/tokens.dart';
+import 'package:canteen_go/src/features/menu/presentation/widgets/menu_card.dart';
 import 'package:flutter/material.dart';
-import '../../../../app/layout/breakpoints.dart';
-import '../../../../app/theme/tokens.dart';
-import 'menu_card.dart';
-import '../../../../common/widgets/skeleton.dart';
 
 class MenuGrid extends StatelessWidget {
   const MenuGrid({super.key});
