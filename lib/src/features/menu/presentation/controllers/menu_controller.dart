@@ -1,43 +1,28 @@
-// lib/src/features/menu/presentation/controllers/menu_controller.dart
-import 'package:canteen_go/src/core/network/supabase_client.dart';
-import 'package:canteen_go/src/core/storage/local_store.dart';
+import 'package:canteen_go/src/features/menu/data/repo/menu_repo.dart';
+import 'package:canteen_go/src/features/menu/domain/models/menu_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/repo/menu_repo.dart';
-import '../../domain/models/menu_item.dart';
-import '../../domain/usecases/refresh_menu.dart';
-
-final menuRepoProvider = Provider<MenuRepo>((ref) {
-  final client = SupabaseAppClient.instance;
-  final localStore = ref.watch(localStoreProvider);
-
-  return SupabaseMenuRepo(client, localStore: localStore);
-});
-
-final refreshMenuProvider = Provider<RefreshMenu>((ref) {
-  final repo = ref.watch(menuRepoProvider);
-  return RefreshMenu(repo);
-});
-
-final menuControllerProvider =
-    StateNotifierProvider<MenuController, AsyncValue<List<MenuItem>>>((ref) {
-      return MenuController(ref);
-    });
+final menuRepoProvider = Provider<MenuRepo>((ref) => FakeMenuRepo());
 
 class MenuController extends StateNotifier<AsyncValue<List<MenuItem>>> {
-  MenuController(this._ref)
-    : super(const AsyncValue<List<MenuItem>>.loading()) {
-    load();
+  MenuController(this.ref) : super(const AsyncValue.loading()) {
+    _loadMenu();
   }
 
-  final Ref _ref;
+  final Ref ref;
 
-  Future<void> load({bool refresh = false}) async {
-    state = const AsyncValue<List<MenuItem>>.loading();
-
-    final refreshMenu = _ref.read(refreshMenuProvider);
-    state = await AsyncValue.guard(() => refreshMenu(refresh: refresh));
+  Future<void> _loadMenu() async {
+    try {
+      final repo = ref.read(menuRepoProvider);
+      final items = await repo.fetchMenu();
+      state = AsyncValue.data(items);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
   }
-
-  Future<void> refresh() => load(refresh: true);
 }
+
+final menuControllerProvider =
+    StateNotifierProvider<MenuController, AsyncValue<List<MenuItem>>>(
+      (ref) => MenuController(ref),
+    );

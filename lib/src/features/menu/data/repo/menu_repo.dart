@@ -1,43 +1,21 @@
-import 'package:canteen_go/src/core/storage/local_store.dart';
-import 'package:canteen_go/src/features/menu/data/dto/menu_item_dto.dart';
 import 'package:canteen_go/src/features/menu/domain/models/menu_item.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class MenuRepo {
-  Future<List<MenuItem>> fetchMenu({bool refresh = false});
+  Future<List<MenuItem>> fetchMenu();
 }
 
-class SupabaseMenuRepo implements MenuRepo {
-  SupabaseMenuRepo(
-    this._client, {
-    LocalStore? localStore,
-  }) : _localStore = localStore;
-  final SupabaseClient _client;
-  final LocalStore? _localStore;
-
+class FakeMenuRepo implements MenuRepo {
   @override
-  Future<List<MenuItem>> fetchMenu({bool refresh = false}) async {
-    if (!refresh && _localStore != null) {
-      final cached = await _localStore!.getMenuItems();
-      if (cached.isNotEmpty) return cached;
-    }
-
-    final response = await _client
-        .from('menu_items')
-        .select('id, name, price, available, image_url, category')
-        .order('name');
-
-    final items = (response as List<dynamic>)
-        .map(
-          (row) => MenuItemDto.fromSupabase(
-            Map<String, dynamic>.from(row as Map<dynamic, dynamic>),
-          ),
-        )
-        .map((dto) => dto.toDomain())
-        .toList();
-
-    await _localStore?.saveMenuItems(items);
-
-    return items;
+  Future<List<MenuItem>> fetchMenu() async {
+    await Future.delayed(const Duration(milliseconds: 350));
+    return const [
+      MenuItem(id: 'm1', name: 'Nasi Goreng', price: 20000),
+      MenuItem(id: 'm2', name: 'Mie Ayam', price: 18000),
+      MenuItem(id: 'm3', name: 'Es Teh Manis', price: 6000),
+      MenuItem(id: 'm4', name: 'Soto Ayam', price: 22000),
+      MenuItem(id: 'm5', name: 'Bakso', price: 20000),
+      MenuItem(id: 'm6', name: 'Ayam Geprek', price: 23000),
+      MenuItem(id: 'm7', name: 'Sate', price: 25000),
+    ];
   }
 }
