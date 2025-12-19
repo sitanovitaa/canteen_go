@@ -37,15 +37,6 @@ subprojects {
                    // Ignore namespace errors
                 }
                 
-                // 2. Force older androidx.core to avoid 'lStar' resource error (requires compileSdk 31+)
-                // Since we can't easily force compileSdk in Kotlin DSL without lifecycle issues,
-                // we downgrade the dependency causing the issue.
-                project.configurations.all {
-                    resolutionStrategy {
-                        force("androidx.core:core:1.6.0")
-                        force("androidx.core:core-ktx:1.6.0")
-                    }
-                }
             }
         }
     }

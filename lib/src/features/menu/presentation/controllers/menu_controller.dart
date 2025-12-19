@@ -1,28 +1,43 @@
-import 'package:canteen_go/src/features/menu/data/repo/menu_repo.dart';
-import 'package:canteen_go/src/features/menu/domain/models/menu_item.dart';
+// lib/src/features/menu/presentation/controllers/menu_controller.dart
+import 'package:canteen_go/src/core/network/supabase_client.dart';
+import 'package:canteen_go/src/core/storage/local_store.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final menuRepoProvider = Provider<MenuRepo>((ref) => FakeMenuRepo());
+import '../../data/repo/menu_repo.dart';
+import '../../domain/models/menu_item.dart';
+import '../../domain/usecases/refresh_menu.dart';
 
-class MenuController extends StateNotifier<AsyncValue<List<MenuItem>>> {
-  MenuController(this.ref) : super(const AsyncValue.loading()) {
-    _loadMenu();
-  }
+final menuRepoProvider = Provider<MenuRepo>((ref) {
+  final client = SupabaseAppClient.instance;
+  final localStore = ref.watch(localStoreProvider);
 
-  final Ref ref;
+  return SupabaseMenuRepo(client, localStore: localStore);
+});
 
-  Future<void> _loadMenu() async {
-    try {
-      final repo = ref.read(menuRepoProvider);
-      final items = await repo.fetchMenu();
-      state = AsyncValue.data(items);
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
-    }
-  }
-}
+final refreshMenuProvider = Provider<RefreshMenu>((ref) {
+  final repo = ref.watch(menuRepoProvider);
+  return RefreshMenu(repo);
+});
 
 final menuControllerProvider =
-    StateNotifierProvider<MenuController, AsyncValue<List<MenuItem>>>(
-      (ref) => MenuController(ref),
-    );
+    StateNotifierProvider<MenuController, AsyncValue<List<MenuItem>>>((ref) {
+      return MenuController(ref);
+    });
+
+class MenuController extends StateNotifier<AsyncValue<List<MenuItem>>> {
+  MenuController(this._ref)
+    : super(const AsyncValue<List<MenuItem>>.loading()) {
+    load();
+  }
+
+  final Ref _ref;
+
+  Future<void> load({bool refresh = false}) async {
+    state = const AsyncValue<List<MenuItem>>.loading();
+
+    final refreshMenu = _ref.read(refreshMenuProvider);
+    state = await AsyncValue.guard(() => refreshMenu(refresh: refresh));
+  }
+
+  Future<void> refresh() => load(refresh: true);
+}
