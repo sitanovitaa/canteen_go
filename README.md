@@ -6,10 +6,6 @@
 
 Proyek ini menerapkan pola feature-first dengan pemisahan presentation, domain, data, dan core. Data menu dibaca dari Supabase dengan caching Isar, dan state dikelola dengan Riverpod.
 
-## Prasyarat
-- Flutter SDK sesuai `.metadata` (Flutter 3.22+/Dart 3.7.2+; SDK env: `>=3.7.2 <4.0.0`)
-- Supabase project dengan table `menu_items`
-- Android/iOS/Chrome emulator atau device
 
 ## Menjalankan
 ```bash
@@ -44,7 +40,11 @@ flutter test
 ```
 
 ## Screenshot Aplikasi & Supabase
-- Halaman Menu: `screenshots/menu.jpg`
-- Halaman Pesanan: `screenshots/pesanan.jpg`
-- Halaman Keranjang: `screenshots/keranjang.jpg`
-- Supabase tabel `menu_items` : `screenshots/supabase-table.jpg`
+- Halaman Menu  
+  ![Halaman Menu](screenshots/menu.jpg)
+- Halaman Pesanan  
+  ![Halaman Pesanan](screenshots/pesanan.jpg)
+- Halaman Keranjang  
+  ![Halaman Keranjang](screenshots/keranjang.jpg)
+- Supabase tabel `menu_items`  
+  ![Supabase table menu_items](screenshots/supabase-table.jpg)
