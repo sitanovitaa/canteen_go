@@ -1,7 +1,6 @@
 import 'package:canteen_go/src/app/layout/breakpoints.dart';
 import 'package:canteen_go/src/app/theme/tokens.dart';
 import 'package:canteen_go/src/common/widgets/error_state.dart';
-import 'package:canteen_go/src/common/widgets/skeleton.dart';
 import 'package:canteen_go/src/features/menu/presentation/controllers/menu_controller.dart';
 import 'package:canteen_go/src/features/menu/presentation/widgets/menu_card.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,6 @@ class MenuGrid extends ConsumerWidget {
           sliver: SliverGrid(
             delegate: SliverChildBuilderDelegate((context, i) {
               final item = items[i];
-              if (i == 0) return const Skeleton(height: 120);
               return MenuCard(id: item.id, title: item.name, price: item.price);
             }, childCount: items.length),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
